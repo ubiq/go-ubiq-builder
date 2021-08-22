@@ -27,7 +27,7 @@ jobs:
         path: build/bin/gubiq-linux-amd64
 
   build-mac:
-    runs-on: macos-11
+    runs-on: macOS-10.15
     steps:
     - name: Check out ubiq/go-ubiq
       uses: actions/checkout@v2
