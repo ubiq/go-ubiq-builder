@@ -4,8 +4,8 @@ on:
   push:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-linux:
+    runs-on: ubuntu-18.04
     steps:
     - name: Check out ubiq/go-ubiq
       uses: actions/checkout@v2
@@ -17,10 +17,29 @@ jobs:
       with:
         go-version: 1.17.x
     - name: Build
-      run: make gubiq
+      run: go run build/ci.go install ./cmd/gubiq
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: build/bin/gubiq
-        path: gubiq-linux-amd64
+        name: gubiq-linux-amd64
+        path: build/bin/gubiq
 
+  build-mac:
+    runs-on: macos-latest
+    steps:
+    - name: Check out ubiq/go-ubiq
+      uses: actions/checkout@v2
+      with:
+        repository: ubiq/go-ubiq
+        ref: v5.2.0
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17.x
+    - name: Build
+      run: go run build/ci.go install ./cmd/gubiq
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: gubiq-darwin-amd64
+        path: build/bin/gubiq
