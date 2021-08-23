@@ -37,9 +37,11 @@ jobs:
     - name: Install Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.16.x
+        go-version: 1.17.x
     - name: Build
       run: |
+        go get golang.org/x/sys
+        git diff
         go run build/ci.go install ./cmd/gubiq
         mv build/bin/gubiq build/bin/gubiq-darwin-amd64
     - name: Upload Artifact
