@@ -67,8 +67,6 @@ jobs:
         go-version: ${{ env.GO_VERSION }}
     - name: Build
       run: |
-        go get golang.org/x/sys
-        git diff
         go run build/ci.go install ./cmd/gubiq
         mv build/bin/gubiq build/bin/gubiq-darwin-amd64
     - name: Upload Artifact
@@ -76,3 +74,33 @@ jobs:
       with:
         name: gubiq-darwin-amd64
         path: build/bin/gubiq-darwin-amd64
+
+  build-windows:
+    runs-on: windows-2019
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+    - name: Check out ubiq/go-ubiq
+      uses: actions/checkout@v2
+      with:
+        repository: ubiq/go-ubiq
+        ref: ${{ env.BUILD_TAG }}
+    - name: Install Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ env.GO_VERSION }}
+    - name: Install MSYS
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: mingw64
+        install: mingw-w64-x86_64-toolchain
+    - name: Build
+      run: |
+        go run build\ci.go install -cc C:\msys64\mingw64\bin\gcc.exe ./cmd/gubiq
+        mv build/bin/gubiq build/bin/gubiq-windows-amd64.exe
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: gubiq-windows-amd64.exe
+        path: build/bin/gubiq-windows-amd64.exe
