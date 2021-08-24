@@ -77,9 +77,6 @@ jobs:
 
   build-windows:
     runs-on: windows-2019
-    defaults:
-      run:
-        shell: msys2 {0}
     steps:
     - name: Check out ubiq/go-ubiq
       uses: actions/checkout@v2
