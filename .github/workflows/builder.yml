@@ -34,7 +34,7 @@ jobs:
       run: |
         sudo -E apt-get -yq --no-install-suggests --no-install-recommends --force-yes install gcc-arm-linux-gnueabi libc6-dev-armel-cross gcc-arm-linux-gnueabihf libc6-dev-armhf-cross gcc-aarch64-linux-gnu libc6-dev-arm64-cross
         sudo ln -s /usr/include/asm-generic /usr/include/asm
-    - name: Build ARM 7
+    - name: Build ARM7
       run: |
         GOARM=7 go run build/ci.go install -arch arm -cc arm-linux-gnueabihf-gcc ./cmd/gubiq
         mv -v build/bin/gubiq build/bin/gubiq-linux-arm7
@@ -43,7 +43,7 @@ jobs:
       with:
         name: gubiq-linux-arm7
         path: build/bin/gubiq-linux-arm7
-    - name: Build ARM AMD64
+    - name: Build ARM64
       run: |
         go run build/ci.go install -arch arm64 -cc aarch64-linux-gnu-gcc ./cmd/gubiq
         mv -v build/bin/gubiq build/bin/gubiq-linux-arm64
