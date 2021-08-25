@@ -95,7 +95,7 @@ jobs:
     - name: Build
       run: |
         go run build\ci.go install -cc C:\msys64\mingw64\bin\gcc.exe ./cmd/gubiq
-        mv build/bin/gubiq build/bin/gubiq-windows-amd64.exe
+        mv build/bin/gubiq.exe build/bin/gubiq-windows-amd64.exe
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
