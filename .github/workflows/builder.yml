@@ -1,7 +1,7 @@
 name: Go-Ubiq GitHub Actions Release Builder
 
 env:
-  BUILD_TAG: v5.4.0
+  BUILD_TAG: v6.0.0
   GO_VERSION: 1.17.x
 on:
   push:
