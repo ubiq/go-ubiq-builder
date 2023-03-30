@@ -76,7 +76,7 @@ jobs:
         path: build/bin/gubiq-darwin-amd64
 
   build-windows:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
     - name: Check out ubiq/go-ubiq
       uses: actions/checkout@v2
