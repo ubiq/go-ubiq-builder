@@ -92,8 +92,16 @@ jobs:
       with:
         msystem: mingw64
         install: mingw-w64-x86_64-gcc
+    - shell: msys2 {0}
+      run: |
+        cygpath -m /
+    - shell: pwsh
+      run: |
+        $Env:MSYS2_ROOT = msys2 -c 'cygpath -m /'
+        $Env:MSYS2_ROOT
     - name: Build
       run: |
+        echo $MSYS2_ROOT
         go run build\ci.go install -cc C:\msys64\mingw64\bin\gcc.exe ./cmd/gubiq
         mv build/bin/gubiq.exe build/bin/gubiq-windows-amd64.exe
     - name: Upload Artifact
