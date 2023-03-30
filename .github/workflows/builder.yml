@@ -101,8 +101,10 @@ jobs:
         $Env:MSYS2_ROOT
     - name: Build
       run: |
+        $Env:MSYS2_ROOT = msys2 -c 'cygpath -m /'
+        $Env:MSYS2_ROOT
         echo $MSYS2_ROOT
-        go run build\ci.go install -cc C:\msys64\mingw64\bin\gcc.exe ./cmd/gubiq
+        go run build\ci.go install -cc $Env:MSYS2_ROOT/mingw64/bin/gcc.exe ./cmd/gubiq
         mv build/bin/gubiq.exe build/bin/gubiq-windows-amd64.exe
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
