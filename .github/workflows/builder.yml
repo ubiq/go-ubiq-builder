@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: Check out ubiq/go-ubiq
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: ubiq/go-ubiq
         ref: ${{ env.BUILD_TAG }}
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ env.GO_VERSION }}
     - name: Build AMD64
@@ -24,7 +24,7 @@ jobs:
         go run build/ci.go install ./cmd/gubiq
         mv build/bin/gubiq build/bin/gubiq-linux-amd64
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: gubiq-linux-amd64
         path: build/bin/gubiq-linux-amd64
@@ -39,7 +39,7 @@ jobs:
         GOARM=7 go run build/ci.go install -arch arm -cc arm-linux-gnueabihf-gcc ./cmd/gubiq
         mv -v build/bin/gubiq build/bin/gubiq-linux-arm7
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: gubiq-linux-arm7
         path: build/bin/gubiq-linux-arm7
@@ -48,7 +48,7 @@ jobs:
         go run build/ci.go install -arch arm64 -cc aarch64-linux-gnu-gcc ./cmd/gubiq
         mv -v build/bin/gubiq build/bin/gubiq-linux-arm64
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: gubiq-linux-arm64
         path: build/bin/gubiq-linux-arm64
@@ -57,12 +57,12 @@ jobs:
     runs-on: macOS-10.15
     steps:
     - name: Check out ubiq/go-ubiq
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: ubiq/go-ubiq
         ref: ${{ env.BUILD_TAG }}
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ env.GO_VERSION }}
     - name: Build
@@ -70,7 +70,7 @@ jobs:
         go run build/ci.go install ./cmd/gubiq
         mv build/bin/gubiq build/bin/gubiq-darwin-amd64
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: gubiq-darwin-amd64
         path: build/bin/gubiq-darwin-amd64
@@ -79,12 +79,12 @@ jobs:
     runs-on: windows-2019
     steps:
     - name: Check out ubiq/go-ubiq
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: ubiq/go-ubiq
         ref: ${{ env.BUILD_TAG }}
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ env.GO_VERSION }}
     - name: Install MSYS
@@ -99,7 +99,7 @@ jobs:
         go run build/ci.go install -arch amd64 -cc $Env:MSYS2_ROOT/mingw64/bin/gcc.exe ./cmd/gubiq
         mv build/bin/gubiq.exe build/bin/gubiq-windows-amd64.exe
     - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: gubiq-windows-amd64.exe
         path: build/bin/gubiq-windows-amd64.exe
